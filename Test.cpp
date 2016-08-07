@@ -1,7 +1,14 @@
 #ifndef TEST_CPP
 #define TEST_CPP
 
-int main(int argc, char* argv[]) {
+#include "test.hpp"
+#include <iostream>
+
+
+using namespace std;
+
+int main(int argc, char const* argv[]) {
+	cout << "Hello World!!!" << endl;
 	return 0;
 }
 
