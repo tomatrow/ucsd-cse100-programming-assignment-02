@@ -162,6 +162,12 @@ vector<int> frequenciesInFile(string fileName)
 		freqs[c]++;
 	}
 
+	// Close it up
+	if (in.is_open())
+	{
+		in.close();
+	}
+
 	return freqs;
 }
 
