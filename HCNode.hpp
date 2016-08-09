@@ -10,7 +10,6 @@ using namespace std;
 /** A class, instances of which are nodes in an HCTree.
  */
 class HCNode {
-    friend bool comp(HCNode* one, HCNode* other);
 
 public:
     int count;
@@ -41,8 +40,5 @@ ostream& operator<<(ostream& stm, const HCNode& n) {
     stm << "[" << n.count << "," << (int) (n.symbol) << "]";
     return stm;
 }
-
-bool comp(HCNode* one, HCNode* other);
-
 
 #endif // HCNODE_HPP
