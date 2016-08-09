@@ -20,9 +20,9 @@ public:
 
     HCNode(int count,
       byte symbol,
-      HCNode* c0 = 0,
-      HCNode* c1 = 0,
-      HCNode* p = 0)
+      HCNode* c0 = nullptr,
+      HCNode* c1 = nullptr,
+      HCNode* p = nullptr)
         : count(count), symbol(symbol), c0(c0), c1(c1), p(p) { }
 
     /** Less-than comparison, so HCNodes will work in std::priority_queue
