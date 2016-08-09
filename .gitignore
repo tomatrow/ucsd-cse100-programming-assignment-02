@@ -2,10 +2,7 @@ refcompress
 refuncompress
 testInput/
 *.dSYM
-BitInputStream.o
-BitOutputStream.o
-HCNode.o
-HCTree.o
+*.o
 test
 compress
 uncompress
