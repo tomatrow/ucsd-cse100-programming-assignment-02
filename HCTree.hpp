@@ -35,7 +35,7 @@ private:
 
 public:
     explicit HCTree() : root(0) {
-        leaves = vector<HCNode*>(256, (HCNode*) 0);
+        leaves = vector<HCNode*>(256, (HCNode*) nullptr);
     }
 
     ~HCTree();
