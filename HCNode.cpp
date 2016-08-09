@@ -13,11 +13,4 @@ bool HCNode::operator<(const HCNode& other)
 	return this->symbol < other.symbol;
 }
 
-bool comp(HCNode* one, HCNode* other)
-{
-	assert(one != nullptr && other != nullptr);
-	return *one < *other;
-}
-
-
 #endif // HCNODE_CPP
