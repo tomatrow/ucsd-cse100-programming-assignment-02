@@ -14,6 +14,10 @@
 
 using namespace std;
 
+HCTree* treeFromFile(string fileName);
+void printFreq(vector<int> vec);
+void testOrder(HCNode* root, vector<HCNode*> leaves, string expected);
+
 int main(int argc, char const* argv[]) {
 	cout << "Hello World!!!" << endl;
 
@@ -29,71 +33,52 @@ int main(int argc, char const* argv[]) {
 */
 int testTree()
 {
-
-	// Test Tree for building.
-	/*
-	    C
-	  A   C
-	     B C
-	*/
-	auto tree = HCTree();
-	string testString = "AABABC";
-	auto freqs = frequenciesInString(testString);
-	// for (int i = 0;i < freqs.size();i++)
-	// {
-	// 	if (freqs[i] > 0)
-	// 	{
-	// 		cout << i << "," << freqs[i] << "\n";
-	// 	}
-	// }
-	tree.build(freqs);
-	// for (auto n : tree.leaves)
-	// {
-	// 	if (n->p != nullptr)
-	// 	{
-	// 		cout << *n->p << "\n";
-	// 	}
-	// }
-	// cout << "end" << endl;
-
-	// cout << (char)tree.root->symbol << "\n";
-	// cout << (char)tree.root->c0->symbol << "\n";
-	// cout << (char)tree.root->c1->symbol << "\n";
-	assert(tree.root->p == nullptr);
-	assert(tree.root->symbol == 'C');
-	assert(tree.root->c0 != nullptr);
-	assert(tree.root->c0->symbol == 'A');
-	assert(tree.root->c0->p == tree.root);
-	assert(tree.root->c0->c0 == nullptr);
-	assert(tree.root->c0->c1 == nullptr);
-	assert(tree.root->c1->symbol == 'C');
-	assert(tree.root->c1->c0->symbol == 'B');
-	assert(tree.root->c1->c1->symbol == 'C');
-
 	// Test Checkpoints
 	string dir = "/Users/ajcaldwell/Dropbox/School/17/Summer2017/CSE100/pa02/working/testInput/";
+	HCTree tree;
 
 	// Checkpoint 1
-	// It's "abcd" repeated ten times.
-	tree = HCTree();
-	string one = dir + "checkpoint1.txt";
-	freqs = frequenciesInFile(one);
-	tree.build(freqs);
+	tree = *treeFromFile(dir + "checkpoint1.txt");
+	testOrder(tree.root, tree.leaves, "abbdcdd");
 
-	// assert(false);
-
-	string expectedInOrder = "abbdcdd";
-	auto inorderVec = new vector<HCNode*>();
-	inorder(tree.root, inorderVec);
-	for (int i = 0; i < expectedInOrder.length(); i++)
-	{
-		// cout << expectedInOrder[i] << endl;
-		// cout << (*inorderVec)[i]->symbol << endl;
-
-		assert(expectedInOrder[i] == (*inorderVec)[i]->symbol);
-	}
+	// Checkpoint 2
+	tree = *treeFromFile(dir + "checkpoint2.txt");
+	testOrder(tree.root, tree.leaves, "abbccdd");
 
 	return 0;
+}
+
+HCTree* treeFromFile(string fileName)
+{
+	auto tree = new HCTree();
+	auto freqs = frequenciesInFile(fileName);
+	tree->build(freqs);
+	return tree;
+}
+
+void testOrder(HCNode* root, vector<HCNode*> leaves, string expected)
+{
+	auto inorderVec = new vector<HCNode*>();
+	inorder(root, inorderVec);
+
+	for (int i = 0; i < expected.length(); i++)
+	{
+		// cout << expected[i] << endl;
+		// cout << (*inorderVec)[i]->symbol << endl;
+
+		assert(expected[i] == (*inorderVec)[i]->symbol);
+	}
+}
+
+void printFreq(vector<int> vec)
+{
+	for (int i = 0;i < vec.size();i++)
+	{
+		if (vec[i] > 0)
+		{
+			cout << (char)i << "," << vec[i] << "\n";
+		}
+	}
 }
 
 int testNode()
