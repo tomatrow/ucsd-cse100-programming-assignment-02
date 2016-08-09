@@ -2,17 +2,20 @@
 #define TEST_HPP
 
 #include <string>
+#include <vector>
+#include "HCNode.hpp"
 
 using namespace std;
 
 int main(int argc, char const *argv[]);
 
-/**
-* For both checkpoint1.txt and checkpoint2.txt
-*   Calls compress
-*   calls uncompress
-*   Diff's between original.
-*/
-void checkPointTest(string location);
+int testNode();
+int testTree();
+
+vector<int> frequenciesInFile(string fileName);
+vector<int> frequenciesInString(string s);
+void postorder(HCNode* root, int indent);
+void inorder(HCNode * root, vector<HCNode*> *vec);
+
 
 #endif // TEST_HPP
