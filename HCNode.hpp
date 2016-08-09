@@ -37,7 +37,17 @@ public:
  */
 ostream& operator<<(ostream&, const HCNode&) __attribute__((weak)); // shut the linker up
 ostream& operator<<(ostream& stm, const HCNode& n) {
-    stm << "[" << n.count << "," << (int) (n.symbol) << "]";
+    stm << "[" << n.count << "," << (char) (n.symbol);
+    stm << " | ";
+    stm << "l:";
+    if (n.c0 != nullptr){
+      cout << (char)n.c0->symbol;
+    }
+    stm << ",r:";
+    if (n.c1 != nullptr){
+      cout << (char)n.c1->symbol;
+    }
+    stm << "]";
     return stm;
 }
 
