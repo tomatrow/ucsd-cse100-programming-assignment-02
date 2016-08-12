@@ -34,7 +34,7 @@ private:
     vector<HCNode*> leaves;
 
 public:
-    explicit HCTree() : root(0) {
+    explicit HCTree() : root(nullptr) {
         leaves = vector<HCNode*>(256, (HCNode*) nullptr);
     }
 
@@ -80,6 +80,28 @@ public:
      */
     int decode(ifstream& in) const;
 
+    /** Write the headers to the given stream.
+     *  PRECONDITION: build() has been called, to create the coding
+     *  tree, and initialize root pointer and leaves vector.
+     */
+    void encodeHeader(ofstream& out) const;
+
+    /** Encodes the main message. Fails of tree is not buildt.
+     */
+    void encodeBody(ifstream& in, ofstream& out) const;
+
+    // Reads the distribution of any text file.
+    static void frequencies(ifstream& in, vector<int>& vec);
+    // Decodes an encoded header.
+    static int decodeHeader(ifstream& in, vector<int>& vec);
+
+    /** Encode in and writes it to out.
+     */
+    void encode(ifstream& in, ofstream& out) const;
+    /** Reads from in and writes to out.
+     * Fails if in isn't in binary.
+     */
+    void decode(ifstream& in, ofstream& out) const;
 };
 
 #endif // HCTREE_HPP
