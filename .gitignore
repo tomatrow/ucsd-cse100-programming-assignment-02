@@ -7,4 +7,5 @@ test
 compress
 uncompress
 Checkpoint.pdf
-
+*.compressed
+*.uncompressed
