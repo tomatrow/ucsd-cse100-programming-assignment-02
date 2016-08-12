@@ -28,8 +28,8 @@ FileUtility::FileUtility(const string & inFileName, const string & outFileName) 
 	unsigned int len = _in->tellg();
 	if (len == 0)
 	{
-		cout << "The file is empty. \n";
-		assert(false);
+		// cout << "The file is empty. \n";
+		// assert(false);
 	}
 
 	//Resets the stream to beginning of file
