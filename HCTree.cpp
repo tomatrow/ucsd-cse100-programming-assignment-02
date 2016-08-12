@@ -88,7 +88,7 @@ void HCTree::build(const vector<int>& freqs)
 
 }
 
-void HCTree::encode(byte symbol, ofstream& out) const
+void HCTree::encodeSymbol(byte symbol, ofstream& out) const
 {
 	assert(root != nullptr); // Build was called.
 
@@ -140,7 +140,7 @@ void HCTree::encodeBody(ifstream& in, ofstream& out) const
 		{
 			break;
 		}
-		encode(c, out);
+		encodeSymbol(c, out);
 	}
 }
 
@@ -163,7 +163,7 @@ void HCTree::frequencies(ifstream& in, vector<int>& vec)
 	in.seekg(0, ios_base::beg);
 }
 
-void HCTree::encode(ifstream& in, ofstream& out) const
+void HCTree::encodeFile(ifstream& in, ofstream& out) const
 {
 	assert(root != nullptr);
 	// reset stream
@@ -187,7 +187,7 @@ int HCTree::decodeHeader(ifstream& in, vector<int>& vec)
 	return in.tellg();
 }
 
-void HCTree::decode(ifstream& in, ofstream& out) const
+void HCTree::decodeFile(ifstream& in, ofstream& out) const
 {
 	assert(root != nullptr);
 	// reset stream
@@ -197,7 +197,7 @@ void HCTree::decode(ifstream& in, ofstream& out) const
 		byte c = in.peek();
 		if (c == '0' || c == '1')
 		{
-			out << (byte) decode(in);;
+			out << (byte) decodeSymbol(in);;
 		}
 		if (in.eof())
 		{
@@ -208,7 +208,7 @@ void HCTree::decode(ifstream& in, ofstream& out) const
 }
 
 
-int HCTree::decode(ifstream& in) const
+int HCTree::decodeSymbol(ifstream& in) const
 {
 	assert(root != nullptr);
 

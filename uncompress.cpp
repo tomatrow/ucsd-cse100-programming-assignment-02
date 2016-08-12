@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 	HCTree::decodeHeader(utility.inFileStream(), freq);
 	HCTree tree;
 	tree.build(freq);
-	tree.decode(utility.inFileStream(), utility.outFileStream());
+	tree.decodeFile(utility.inFileStream(), utility.outFileStream());
 
 	return 0;
 }

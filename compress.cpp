@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
 	HCTree tree;
 	tree.build(freq);
-	tree.encode(utility.inFileStream(), utility.outFileStream());
+	tree.encodeFile(utility.inFileStream(), utility.outFileStream());
 
 	return 0;
 }
