@@ -8,10 +8,21 @@
 #include <iostream>
 
 
+static void deleteAll(HCNode* n);
+
 
 HCTree::~HCTree()
 {
-// TODO
+	// remove the fake nodes
+	deleteAll(root);
+	// remove the leaves
+	for (auto p : leaves)
+	{
+		if (p != nullptr)
+		{
+			delete(p);
+		}
+	}
 }
 
 void HCTree::build(const vector<int>& freqs)
@@ -76,5 +87,31 @@ void HCTree::build(const vector<int>& freqs)
 	assert(queue.empty());
 
 }
+
+
+
+/** postorder traversal, deleting nodes
+*/
+static void deleteAll(HCNode* n) {
+	/* Pseudo Code:
+	  if current node is null: return;
+	  recursively delete left sub-tree
+	  recursively delete right sub-tree
+	  delete current node
+	*/
+
+	if (n == nullptr)
+	{
+		return;
+	}
+	if (n->c0 == nullptr && n->c1 == nullptr) {// leave the leaves for later
+		return;
+	}
+	deleteAll(n->c0);
+	deleteAll(n->c1);
+	delete(n);
+	n = 0;
+}
+
 
 #endif // HCTREE_CPP
