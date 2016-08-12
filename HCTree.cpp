@@ -93,8 +93,16 @@ void HCTree::encode(byte symbol, ofstream& out) const
 	assert(root != nullptr); // Build was called.
 
 	auto leaf = leaves[symbol];
-	string code = "";
 
+	// edge case of single symbol
+	if (leaf == root)
+	{
+		out << "0";
+		return;
+	}
+
+	// normal
+	string code = "";
 	while (leaf->p != nullptr)
 	{
 		if (leaf->p->c0->symbol == leaf->symbol)
@@ -203,8 +211,16 @@ void HCTree::decode(ifstream& in, ofstream& out) const
 int HCTree::decode(ifstream& in) const
 {
 	assert(root != nullptr);
-	// assume the stream isnt empty
-	// assome it's all 0's, 1's
+
+	// just one letter edge case
+	if (root->c0 == nullptr && root->c1 == nullptr)
+	{
+		byte c = in.get();
+		assert(c == '0');
+		return root->symbol;
+	}
+
+	// Normal
 	auto current = root;
 	while (current->c0 != nullptr || current->c1 != nullptr)
 	{
