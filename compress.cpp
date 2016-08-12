@@ -18,6 +18,25 @@ int main(int argc, char* argv[]) {
 	FileUtility utility(argv[1], argv[2]);
 	vector<int> freq(256);
 	HCTree::frequencies(utility.inFileStream(), freq);
+
+	// that edge case
+	bool allZero = true;
+	for (auto x : freq)
+	{
+		if (x > 0)
+		{
+			allZero = false;
+		}
+	}
+	if (allZero)
+	{
+		for (auto x : freq)
+		{
+			utility.outFileStream() << x << endl;
+		}
+		return 0;
+	}
+
 	HCTree tree;
 	tree.build(freq);
 	tree.encode(utility.inFileStream(), utility.outFileStream());
