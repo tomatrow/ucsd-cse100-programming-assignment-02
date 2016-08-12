@@ -3,32 +3,44 @@
 
 #include <vector>
 #include <fstream>
+#include <string>
+
+using namespace std;
 
 /** Does things with the file system.
 * Serves streams and closes them.
-* Diffs
-* Gets frequencies sinces there is nowhere else to put it.
 */
 class FileUtility
 {
+
 private:
-	vector<int>* freqs;
-	string fileName;
-	ofstream* out;
-	ifstream* in;
+	const string _inFileName;
+	const string _outFileName;
+
+	ifstream* _in;
+	ofstream* _out;
 
 public:
 
-	FileUtility(string fileName);
+	/** The only constructor.
+	 *  Opens the infile and makes sure it's readable and non-empty.
+	 *  Makes sure outfile does NOT exist.
+	 */
+	FileUtility(const string & inFileName, const string & outFileName);
+
+	/** The deconstructor.
+	 * Closes streams.
+	 * Deletes pointers.
+	 */
 	~FileUtility();
 
-	ofstream& outFileStream() const;
+	// The all important streams.
 	ifstream& inFileStream() const;
+	ofstream& outFileStream() const;
 
-	const vector<int> freqs() const;
-	const string fileName() const;
-
-	static bool different(string firstName, string secondName) const;
+	// getters
+	const string inFileName() const;
+	const string outFileName() const;
 };
 
 #endif // FILEUTILITY_HPP

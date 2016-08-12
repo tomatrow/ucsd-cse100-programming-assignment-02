@@ -6,11 +6,11 @@ LDFLAGS=-g
 
 all: compress uncompress test
 
-compress: BitInputStream.o BitOutputStream.o HCNode.o HCTree.o
+compress: BitInputStream.o BitOutputStream.o HCNode.o HCTree.o FileUtility.o
 
-uncompress: BitInputStream.o BitOutputStream.o HCNode.o HCTree.o
+uncompress: BitInputStream.o BitOutputStream.o HCNode.o HCTree.o FileUtility.o
 
-test: BitInputStream.o BitOutputStream.o HCNode.o HCTree.o
+test: BitInputStream.o BitOutputStream.o HCNode.o HCTree.o FileUtility.o
 
 HCTree.o: BitInputStream.hpp BitOutputStream.hpp HCNode.hpp HCTree.hpp
 
@@ -19,6 +19,8 @@ HCNode.o: HCNode.hpp
 BitOutputStream.o: BitOutputStream.hpp
 
 BitInputStream.o: BitInputStream.hpp
+
+FileUtility.o: FileUtility.hpp
 
 run: compress uncompress
 	rm -fr *.compressed *.uncompressed
