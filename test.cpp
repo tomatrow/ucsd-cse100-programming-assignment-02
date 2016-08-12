@@ -164,17 +164,10 @@ vector<int> frequenciesInFile(string fileName)
 
 	//Resets the stream to beginning of file
 	in.seekg(0, ios_base::beg);
+
+	// Build the list
 	vector<int> freqs(256);
-	while (true) {
-		char c = in.get();
-		// explained in the slides.
-		// Apperently, eof is reached by reading PAST the file.
-		if (in.eof())
-		{
-			break;
-		}
-		freqs[c]++;
-	}
+	HCTree::frequencies(in, freqs);
 
 	// Close it up
 	if (in.is_open())
