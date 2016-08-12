@@ -48,37 +48,17 @@ public:
      */
     void build(const vector<int>& freqs);
 
-    /** Write to the given BitOutputStream
-     *  the sequence of bits coding the given symbol.
-     *  PRECONDITION: build() has been called, to create the coding
-     *  tree, and initialize root pointer and leaves vector.
-     */
-    void encode(byte symbol, BitOutputStream& out) const;
 
-    /** Write to the given ofstream
-     *  the sequence of bits (as ASCII) coding the given symbol.
-     *  PRECONDITION: build() has been called, to create the coding
-     *  tree, and initialize root pointer and leaves vector.
-     *  THIS METHOD IS USEFUL FOR THE CHECKPOINT BUT SHOULD NOT
-     *  BE USED IN THE FINAL SUBMISSION.
-     */
-    void encode(byte symbol, ofstream& out) const;
+    // MARK - Encoding
 
 
-    /** Return symbol coded in the next sequence of bits from the stream.
-     *  PRECONDITION: build() has been called, to create the coding
-     *  tree, and initialize root pointer and leaves vector.
-     */
-    int decode(BitInputStream& in) const;
+    /// Reads the distribution of any text file.
+    static void frequencies(ifstream& in, vector<int>& vec);]
 
-    /** Return the symbol coded in the next sequence of bits (represented as
-     *  ASCII text) from the ifstream.
-     *  PRECONDITION: build() has been called, to create the coding
-     *  tree, and initialize root pointer and leaves vector.
-     *  THIS METHOD IS USEFUL FOR THE CHECKPOINT BUT SHOULD NOT BE USED
-     *  IN THE FINAL SUBMISSION.
+    /** Encode in and writes it to out.
+     * Effectivly calls encodeFile() and encodeHeader()
      */
-    int decode(ifstream& in) const;
+    void encodeFile(ifstream& in, ofstream& out) const;
 
     /** Write the headers to the given stream.
      *  PRECONDITION: build() has been called, to create the coding
@@ -90,18 +70,48 @@ public:
      */
     void encodeBody(ifstream& in, ofstream& out) const;
 
-    // Reads the distribution of any text file.
-    static void frequencies(ifstream& in, vector<int>& vec);
-    // Decodes an encoded header.
+    /** Write to the given BitOutputStream
+     *  the sequence of bits coding the given symbol.
+     *  PRECONDITION: build() has been called, to create the coding
+     *  tree, and initialize root pointer and leaves vector.
+     */
+    void encodeSymbol(byte symbol, BitOutputStream& out) const;
+
+    /** Write to the given ofstream
+     *  the sequence of bits (as ASCII) coding the given symbol.
+     *  PRECONDITION: build() has been called, to create the coding
+     *  tree, and initialize root pointer and leaves vector.
+     *  THIS METHOD IS USEFUL FOR THE CHECKPOINT BUT SHOULD NOT
+     *  BE USED IN THE FINAL SUBMISSION.
+     */
+    void encodeSymbol(byte symbol, ofstream& out) const;
+
+
+    // MARK - Decoding
+
+
+    /// Decodes an encoded header.
     static int decodeHeader(ifstream& in, vector<int>& vec);
 
-    /** Encode in and writes it to out.
-     */
-    void encode(ifstream& in, ofstream& out) const;
     /** Reads from in and writes to out.
-     * Fails if in isn't in binary.
      */
-    void decode(ifstream& in, ofstream& out) const;
+    void decodeFile(ifstream& in, ofstream& out) const;
+
+    /** Return symbol coded in the next sequence of bits from the stream.
+     *  PRECONDITION: build() has been called, to create the coding
+     *  tree, and initialize root pointer and leaves vector.
+     */
+    int decodeSymbol(BitInputStream& in) const;
+
+    /** Return the symbol coded in the next sequence of bits (represented as
+     *  ASCII text) from the ifstream.
+     *  PRECONDITION: build() has been called, to create the coding
+     *  tree, and initialize root pointer and leaves vector.
+     *  THIS METHOD IS USEFUL FOR THE CHECKPOINT BUT SHOULD NOT BE USED
+     *  IN THE FINAL SUBMISSION.
+     */
+    int decodeSymbol(ifstream& in) const;
+
 };
 
 #endif // HCTREE_HPP
