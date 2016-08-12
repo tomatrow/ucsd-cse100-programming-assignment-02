@@ -14,17 +14,29 @@
 
 using namespace std;
 
-HCTree* treeFromFile(string fileName);
-void printFreq(vector<int> vec);
+
 void testOrder(HCNode* root, vector<HCNode*> leaves, string expected);
+void treePlayground(HCTree tree);
+HCTree* treeFromFile(string fileName);
+void testFileUtility();
 
 int main(int argc, char const* argv[]) {
 	cout << "Hello World!!!" << endl;
 
 	testNode();
 	testTree();
+	testFileUtility();
 
 	return 0;
+}
+
+void testFileUtility()
+{
+	string original  = "testInput/checkpoint1.txt";
+	string compressed = original + ".compressed";
+	string uncompressed = original + ".uncompressed";
+
+	FileUtility utility(compressed, compressed);
 }
 
 /** Tests the tree.
