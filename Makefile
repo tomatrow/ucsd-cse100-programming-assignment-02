@@ -20,6 +20,9 @@ BitOutputStream.o: BitOutputStream.hpp
 
 BitInputStream.o: BitInputStream.hpp
 
+run: compress uncompress
+	rm -fr *.compressed *.uncompressed
+	./runTests.fish justA checkpoint1.txt checkpoint2.txt justABC empty
 
 clean:
 	rm -fr compress uncompress test *.o core* *.dSYM
