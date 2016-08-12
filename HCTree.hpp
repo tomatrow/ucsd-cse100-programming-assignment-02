@@ -53,7 +53,7 @@ public:
 
 
     /// Reads the distribution of any text file.
-    static void frequencies(ifstream& in, vector<int>& vec);]
+    static void frequencies(ifstream& in, vector<int>& vec);
 
     /** Encode in and writes it to out.
      * Effectivly calls encodeFile() and encodeHeader()
