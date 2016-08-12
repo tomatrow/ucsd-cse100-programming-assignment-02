@@ -1,7 +1,7 @@
 # A simple makefile for CSE 100 PA2
 
 CC=g++
-CXXFLAGS=-std=c++11 -g -gdwarf-2
+CXXFLAGS=-Wall -std=c++11 -g -gdwarf-2
 LDFLAGS=-g
 
 all: compress uncompress test
