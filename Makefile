@@ -27,4 +27,5 @@ run: compress uncompress
 	./runTests.fish justA checkpoint1.txt checkpoint2.txt justABC empty
 
 clean:
-	rm -fr compress uncompress test *.o core* *.dSYM
+	rm -fr compress uncompress test *.o core* *.dSYM *.compressed *.uncompressed Checkpoint.pdf
+
