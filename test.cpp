@@ -60,6 +60,23 @@ int testTree()
 	return 0;
 }
 
+
+
+
+void treePlayground(HCTree tree)
+{
+	ofstream s;
+
+	cout << "a";
+	tree.encodeSymbol((byte)'a', s);
+	cout << "b";
+	tree.encodeSymbol((byte)'b', s);
+	cout << "c";
+	tree.encodeSymbol((byte)'c', s);
+	cout << "d";
+	tree.encodeSymbol((byte)'d', s);
+}
+
 HCTree* treeFromFile(string fileName)
 {
 	auto tree = new HCTree();
